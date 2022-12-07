@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Snow
-  m_Shader: {fileID: 4800000, guid: 18cc8fe7d50c89741b56c1ae6a5baa66, type: 3}
-  m_Parent: {fileID: 2100000, guid: 4f2c8f75a82ee6843beacdfae96df3b1, type: 2}
+  m_Shader: {fileID: 4800000, guid: 5e366272114d7d541bdf3e04c3a79d20, type: 3}
+  m_Parent: {fileID: 2100000, guid: d805d893cc3762c4897567e3cd4db4cc, type: 2}
   m_ModifiedSerializedProperties: 6
-  m_ValidKeywords:
-  - _BLENDMODE_BLEND
+  m_ValidKeywords: []
   m_InvalidKeywords:
+  - _BLENDMODE_BLEND
   - _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
