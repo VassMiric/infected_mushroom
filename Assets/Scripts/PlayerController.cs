@@ -29,7 +29,11 @@ public class PlayerController : MonoBehaviour
         dead,
     }
 
+    private float _nextHit = 1.5f;
+    private float _refractory = 0.5f;
+
     private void Start() {
+        
         state = State.normal;
         isWalking = false;
         isDodging = false;
@@ -42,26 +46,26 @@ public class PlayerController : MonoBehaviour
 
     void Update() 
     {
-        switch(state)
+        switch (state)
         {
-        case State.normal:
-            bool roll = Input.GetKeyDown(KeyCode.Space);
-            GatherInput();  
-            Look();
-            HandleRoll(roll);
-            HandleAttack();
-            HandleInteract();
-            break;
-        case State.attacking:
-            HandleAttacking();
-            break;
-        case State.sliding:
-            HandleSliding();
-            break;
-        case State.dead:
-            isDead = true;
-            PlayerDead();
-            break;
+            case State.normal:
+                bool roll = Input.GetKeyDown(KeyCode.Space);
+                GatherInput();
+                Look();
+                HandleRoll(roll);
+                HandleAttack();
+                HandleInteract();
+                break;
+            case State.attacking:
+                HandleAttacking();
+                break;
+            case State.sliding:
+                HandleSliding();
+                break;
+            case State.dead:
+                isDead = true;
+                PlayerDead();
+                break;
         }
     }
 
@@ -173,12 +177,12 @@ public class PlayerController : MonoBehaviour
 
     void HandleInteract()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown("e"))
         {
             isInteracting = true;
             anim.SetBool("isInteracting", true);
         }
-        else
+        else if(Input.GetKeyUp("e"))
         {
             isInteracting = false;
             anim.SetBool("isInteracting", false);
