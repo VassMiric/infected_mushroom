@@ -153,11 +153,11 @@ public class PlayerController : MonoBehaviour
 
     void HandleAttack()
     {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetKeyDown(KeyCode.J))
         {
             anim.SetBool("isAttacking", true);
             state = State.attacking;
-            attackDur = 10.0f;
+            attackDur = 200.0f;
             Debug.Log("Attack Start!");
         }
     }
