@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public PlayerController player;
     public Rigidbody phys;
     public float speed;
-    public float health = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,24 +34,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay(Collider collide)
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
 
-        if (collide.transform.tag == "Player" && player.isAttacking)
-        {
-            health--;
-        }
-        else if (collide.transform.tag == "Player" && !player.isAttacking)
+        if (collide.transform.tag == "Player" && !player.isAttacking)
         {
             player.DamagePlayer();
         }
-    }
-
-    private void OnTriggerEnter(Collider collide)
-    {
-
     }
 
 }
