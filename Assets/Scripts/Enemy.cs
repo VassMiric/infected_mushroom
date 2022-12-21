@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public Rigidbody phys;
     public float speed;
     public float health = 2.0f;
+    private float _cooldown = 1.5f;
+    private float _refractory = 2.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +42,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collide.transform.tag == "Player" && player.isAttacking)
+        if (collide.transform.tag == "Player" && player.isAttacking && Time.time > _cooldown)
         {
             health--;
+            _cooldown = Time.time + _refractory;
         }
         else if (collide.transform.tag == "Player" && !player.isAttacking)
         {

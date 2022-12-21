@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private GameObject gameOverUI;
 
     private float _cooldown = 1.5f;
-    private float _refractory = 0.5f;
+    private float _refractory = 3.0f;
     public HealthBar healthBar;
 
     private void Start() {
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
         currenthealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(currenthealth);
         state = State.normal;
         isWalking = false;
         isDodging = false;

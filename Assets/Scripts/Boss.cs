@@ -12,7 +12,7 @@ public class Boss : MonoBehaviour
     public float speed;
     public Animator animator;
     private float _cooldown = 1.5f;
-    private float _refractory = 5.5f;
+    private float _refractory = 4.0f;
     // Start is called before the first frame update
     void Start()
     {

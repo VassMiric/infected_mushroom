@@ -16,6 +16,9 @@ public class Tomb_One : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        puzzle.tomb1 = false;
+        if (transform.tag == "Grave_Main")
+        {
+            puzzle.tomb1 = false;
+        }
     }
 }
