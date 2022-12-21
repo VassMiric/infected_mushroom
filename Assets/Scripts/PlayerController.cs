@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     public bool isDead;
 
+    public float health = 100f;
+    public float damage = 10f;
+
     public float attackDur;
     public Animator anim;
     private enum State
@@ -29,7 +32,7 @@ public class PlayerController : MonoBehaviour
         dead,
     }
 
-    private float _nextHit = 1.5f;
+    private float _cooldown = 1.5f;
     private float _refractory = 0.5f;
 
     private void Start() {
@@ -189,6 +192,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void DamagePlayer()
+    {
+        if(health <= 0)
+        {
+            state = State.dead;
+        }
+        else
+        {
+            if(Time.time > _cooldown)
+            {
+                Debug.Log("success");
+                health -= damage;
+                _cooldown = Time.time + _refractory;
+            }
+        }
+    }
 
 
 }

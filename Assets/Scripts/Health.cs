@@ -44,10 +44,7 @@ public class Health : MonoBehaviour
         player = gameObject.GetComponent<PlayerController>();
     }
 
-    public void takeSanityDamage()
-    {
-        HealthPoints -= 1;
-    }
+
 
 
 }

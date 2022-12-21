@@ -20,6 +20,7 @@ public class VisionCone : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        Target = LayerMask.GetMask("Player");
         StartCoroutine(ViewRoutine());
     }
 

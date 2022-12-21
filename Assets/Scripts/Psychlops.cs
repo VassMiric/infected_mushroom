@@ -51,7 +51,7 @@ public class Psychlops : MonoBehaviour
         if(cone.PlayerVisible)
         {
             Health playerhp = player.GetComponent<Health>();
-            playerhp.takeSanityDamage();
+           // playerhp.takeSanityDamage();
         }
 
         if(weak.PlayerInRange)
