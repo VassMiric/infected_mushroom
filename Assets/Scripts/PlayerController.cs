@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     public bool isDead;
 
-    public float health = 100f;
-    public float damage = 10f;
+    public int maxHealth = 100;
+    public int currenthealth;
+    public int damage = 10;
 
     public float attackDur;
     public Animator anim;
@@ -32,11 +33,18 @@ public class PlayerController : MonoBehaviour
         dead,
     }
 
+    [SerializeField]
+    private GameObject gameOverUI;
+
     private float _cooldown = 1.5f;
     private float _refractory = 0.5f;
+    public HealthBar healthBar;
 
     private void Start() {
-        
+
+
+        currenthealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         state = State.normal;
         isWalking = false;
         isDodging = false;
@@ -194,16 +202,19 @@ public class PlayerController : MonoBehaviour
 
     public void DamagePlayer()
     {
-        if(health <= 0)
+        if(currenthealth <= 0)
         {
             state = State.dead;
+            gameOverUI.SetActive(true);
         }
         else
         {
             if(Time.time > _cooldown)
             {
                 Debug.Log("success");
-                health -= damage;
+                currenthealth -= damage;
+                int newHealth = (int)currenthealth;
+                healthBar.SetHealth(newHealth);
                 _cooldown = Time.time + _refractory;
             }
         }
