@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Boss : MonoBehaviour
 {
+    public int health = 3;
+    PlayerController player;
     public VisionCone cone;
     public GameObject target;
-    public PlayerController player;
     public Rigidbody phys;
     public float speed;
-    public float health = 2.0f;
+    public Animator animator;
+    private float _cooldown = 1.5f;
+    private float _refractory = 5.5f;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         cone = gameObject.GetComponent<VisionCone>();
         target = GameObject.FindGameObjectWithTag("Player");
         phys = gameObject.GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
@@ -25,34 +28,38 @@ public class Enemy : MonoBehaviour
         if (cone.PlayerVisible)
         {
             //attack
+            animator.SetBool("Player_Visible", true);
             Vector3 temp = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
             Vector3 pos = Vector3.MoveTowards(transform.position, temp, speed * Time.fixedDeltaTime);
             transform.LookAt(target.transform);
             phys.MovePosition(pos);
         }
 
+        if (!cone.PlayerVisible)
+        {
+            animator.SetBool("Player_Visible", false);
+        }
     }
 
-    private void OnTriggerStay(Collider collide)
+    private void OnTriggerStay(Collider other)
     {
-        if (health <= 0)
+        Debug.Log("boss collision");
+        if(health <= 0)
         {
             Destroy(gameObject);
         }
 
-        if (collide.transform.tag == "Player" && player.isAttacking)
+        if (transform.tag == "Player" && player.isAttacking && Time.time > _cooldown)
         {
             health--;
+            _cooldown = Time.time + _refractory;
         }
-        else if (collide.transform.tag == "Player" && !player.isAttacking)
+
+        if (transform.tag == "Player" && !player.isAttacking)
         {
+            Debug.Log("boss damage");
             player.DamagePlayer();
         }
+   
     }
-
-    private void OnTriggerEnter(Collider collide)
-    {
-
-    }
-
 }
